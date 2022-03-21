@@ -1,24 +1,81 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+<CarouselPage xmlns="http://xamarin.com/schemas/2014/forms"
+              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+              x:Class="MyRecipesLab1.MainPage">
+    <ContentPage>
+        <ContentPage.Padding>
+            <OnPlatform x:TypeArguments="Thickness">
+                <On Platform="iOS, Android" Value="0,40,0,0" />
+            </OnPlatform>
+        </ContentPage.Padding>
+        <StackLayout>
+            <StackLayout>
+                <Entry Text="{Binding SearchString}" Placeholder="Поиск"/>
+                <Picker ItemsSource="{Binding Categories}" SelectedIndex="{Binding SelectedCategory}" />
+            </StackLayout>
+            <Button Text="Добавить" Command="{Binding AddRecipeCommand}" />
+            <ListView x:Name="recipeList" ItemsSource="{Binding RecipeList}"
+              SelectedItem="{Binding SelectedRecipe, Mode=TwoWay}" HasUnevenRows="True">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <ViewCell.View>
+                                <StackLayout>
+                                    <StackLayout>
+                                        <Label Text="{Binding Name}" FontSize="Medium" />
+                                        <Label Text="{Binding Date, StringFormat=({0})}" FontSize="Small" />
+                                    </StackLayout>
+                                    <Label Text="{Binding CategoryName}" FontSize="Medium" />
+                                    <Label Text="{Binding IngredientsList}" FontSize="Small" />
+                                </StackLayout>
+                            </ViewCell.View>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+    </ContentPage>
+    <ContentPage>
+        <StackLayout>
+            <Label Text="Разработал: Ширшов Алексей Алексеевич" FontSize="Medium" />
+            <Label Text="Software Engineer / .NET Developer – System Technologies" FontSize="Small" />
+            <Label Text="Студент группы 981074 ИИТ БГУИР" FontSize="Small" />
+        </StackLayout>
+    </ContentPage>
+    <ContentPage>
+        <StackLayout>
+            <Label Text="Помощь" FontSize="Medium" />
+            <Label Text="Ну тут и так всё понятно, ну серьезно, это лаба..." FontSize="Medium" />
+        </StackLayout>
+    </ContentPage>
+</CarouselPage>
+<!--<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="MyRecipesLab1.MainPage">
-
-    <StackLayout>
-        <Frame BackgroundColor="#2196F3" Padding="24" CornerRadius="0">
-            <Label Text="Welcome to Xamarin.Forms!" HorizontalTextAlignment="Center" TextColor="White" FontSize="36"/>
-        </Frame>
-        <Label Text="Start developing now" FontSize="Title" Padding="30,10,30,10"/>
-        <Label Text="Make changes to your XAML file and save to see your UI update in the running app with XAML Hot Reload. Give it a try!" FontSize="16" Padding="30,0,30,0"/>
-        <Label FontSize="16" Padding="30,24,30,0">
-            <Label.FormattedText>
-                <FormattedString>
-                    <FormattedString.Spans>
-                        <Span Text="Learn more at "/>
-                        <Span Text="https://aka.ms/xamarin-quickstart" FontAttributes="Bold"/>
-                    </FormattedString.Spans>
-                </FormattedString>
-            </Label.FormattedText>
-        </Label>
+             x:Class="MyRecipesLab1.MainPage" Title="Список рецептов">
+    <StackLayout>   
+        <StackLayout>
+            <Entry Text="{Binding SearchString}" Placeholder="Поиск"/>
+            <Picker ItemsSource="{Binding Categories}" SelectedIndex="{Binding SelectedCategory}" />
+        </StackLayout>
+        <Button Text="Добавить" Command="{Binding AddRecipeCommand}" />
+        <ListView x:Name="recipeList" ItemsSource="{Binding RecipeList}"
+              SelectedItem="{Binding SelectedRecipe, Mode=TwoWay}" HasUnevenRows="True">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <ViewCell.View>
+                            <StackLayout>
+                                <StackLayout>
+                                    <Label Text="{Binding Name}" FontSize="Medium" />
+                                    <Label Text="{Binding Date, StringFormat=({0})}" FontSize="Small" />
+                                </StackLayout>
+                                <Label Text="{Binding CategoryName}" FontSize="Medium" />
+                                <Label Text="{Binding IngredientsList}" FontSize="Small" />
+                            </StackLayout>
+                        </ViewCell.View>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
     </StackLayout>
-
-</ContentPage>
+</ContentPage>-->

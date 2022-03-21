@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MyRecipesLab1.PAL.Views.RecipeView">
+    <ContentPage.Content>
+        <StackLayout>
+            <StackLayout x:Name="recipeStack">
+                <Label Text="Название" />
+                <Entry Text="{Binding Name}" FontSize="Medium" />
+                <Picker ItemsSource="{Binding Categories}" SelectedIndex="{Binding Category}" />
+                <StackLayout Orientation="Horizontal">
+                    <Label Text="Ингредиенты" />
+                    <Button Text="+" Command="{Binding AddIngredientCommand}"/>
+                    <Button Text="-" Command="{Binding RemoveIngredientCommand}"/>
+                </StackLayout>
+                <StackLayout>
+                    <ListView x:Name="recipeList" ItemsSource="{Binding Ingredients}">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <ViewCell>
+                                    <ViewCell.View>
+                                        <StackLayout Orientation="Horizontal">
+                                            <Entry Text="{Binding Name}" FontSize="Medium" />
+                                            <Entry Text="{Binding Weight}" Keyboard="Numeric" FontSize="Medium" />
+                                            <Picker ItemsSource="{Binding TypesOfWeight}" SelectedIndex="{Binding SelectedIndexOfTypeOfWeight}" />
+                                        </StackLayout>
+                                    </ViewCell.View>
+                                </ViewCell>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </StackLayout>
+            </StackLayout>
+            <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand">
+                <Button Text="{Binding AddEditLabel}" Command="{Binding ListViewModel.SaveRecipeCommand}" CommandParameter="{Binding}" />
+                <Button Text="Удалить" Command="{Binding ListViewModel.RemoveRecipeCommand}" CommandParameter="{Binding}" />
+                <Button Text="Назад" Command="{Binding Path=ListViewModel.BackCommand}" />
+            </StackLayout>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
